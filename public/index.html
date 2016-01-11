@@ -1,0 +1,71 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<body>
+<h1 style='text-align:center'>Node & SQL DEMO</h1>
+
+<h3>See Student Records & Details</h3>
+<form method="get" action="getDetails">
+	<label for='email'>Email</label>
+    <input type="text" name="email">
+    <input type="submit">
+</form>
+
+<br><br><br>
+
+<h3>Update Student Marks</h3>
+<form method='post'>
+	<label for='email'>Email</label>
+	<input type='text' name='email' />
+	<br><br>
+	<label for='email'>Mark1</label>
+	<input type='text' name='test1' />
+	<br><br>
+	<label for='email'>Mark2</label> 
+	<input type='text' name='test2' />
+	<br><br>
+	<label for='email'>Mark3</label>
+	<input type='text' name='test3' />
+	<br><br>
+	<button onclick='updateMarks(email, test1, test2, test3)'>Update Marks</button>
+</form>
+
+<div>
+	<p id='return'></p>
+</div>
+
+</body>
+
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+<script type='text/javascript'>
+	var updateMarks = function() {
+		$.ajax({
+			url: 'updateMarks',
+			method: 'POST',
+			data: {email: email, test1: test1, test2: test2, test3: test3},
+			dataType: 'html'
+		}).done(function(ret){
+			$('#return').innerHTML = ret;
+		}).fail(function(err) {
+			alert(err);
+		});
+	};
+
+	var getDetails = function() {
+		$.ajax({
+			url: 'getDetails',
+			method: 'GET',
+			data: {email: email},
+			dataType: 'html'
+		}).done(function(ret){
+			$('#return').innerHTML = ret;
+		}).fail(function(err) {
+			alert(err);
+		});
+	};
+</script>
+</html>
